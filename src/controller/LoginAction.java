@@ -53,7 +53,7 @@ public class LoginAction extends Action {
 			// Look up the user
 			EmployeeBean employee = null;
 			try {
-				employee = employeeDAO.read(form.getEmail());
+				employee = employeeDAO.read(form.getUserName());
 			} catch (RollbackException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.mybeans.form.FormBean;
-
 public class LoginForm extends FormBean{
 	private String userName;
 	private String password;
@@ -23,8 +22,8 @@ public class LoginForm extends FormBean{
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
 
-		if (email == null || email.length() == 0)
-			errors.add("EmailAddress is required");
+		if (userName == null || userName.length() == 0)
+			errors.add("UserName is required");
 		if (password == null || password.length() == 0)
 			errors.add("Password is required");
 		if (action == null)
@@ -35,8 +34,8 @@ public class LoginForm extends FormBean{
 
 		if (!action.equals("Login"))
 			errors.add("Invalid button");
-		if (email.matches(".*[<>\"].*"))
-			errors.add("EmailAddress may not contain angle brackets or quotes");
+		if (userName.matches(".*[<>\"].*"))
+			errors.add("Username may not contain angle brackets or quotes");
 
 		return errors;
 	}

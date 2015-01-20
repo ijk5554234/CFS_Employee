@@ -11,7 +11,6 @@ import org.genericdao.RollbackException;
 import databeans.PriceBean;
 
 public class PriceDAO extends GenericDAO<PriceBean>{
-
 	public PriceDAO(String tableName, ConnectionPool pool) throws DAOException {
 		super(PriceBean.class, tableName, pool);
 	}
@@ -38,5 +37,9 @@ public class PriceDAO extends GenericDAO<PriceBean>{
 		return lastDayPrices;
 	} 
 	
-
+	public long getLastDayByFund(int fundId) throws RollbackException {
+		Date lastDay = getLastDay();
+		PriceBean lastDayPrice = read(fundId, lastDay);
+		return lastDayPrice.getPrice();
+	} 
 }
