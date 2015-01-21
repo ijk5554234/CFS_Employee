@@ -41,6 +41,7 @@ public class DepositCheckAction extends Action {
 				return "error.jsp";
 			}
 			
+			CustomerBean[] customers = customerDAO.match();
 			String email = depositForm.getEmail();
 			int customerId = customerDAO.getCustomerByEmail(email).getCustomerId();
 			long check = depositForm.getAmountAsLong();
@@ -51,6 +52,7 @@ public class DepositCheckAction extends Action {
 			trans.setCustomerId(customerId);
 			
 			transactionDAO.create(trans);
+			request.setAttribute("customers",customers);
 		} catch (FormBeanException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
