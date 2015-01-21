@@ -1,4 +1,4 @@
-<jsp:include page="customer-toptemplate.jsp" />
+
 
 <p style="font-size:medium">
     ${message}
