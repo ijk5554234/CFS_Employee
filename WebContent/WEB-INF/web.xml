@@ -4,12 +4,10 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5">
-  <display-name>HW9-jike</display-name>
-  <description>
-      HW9 Favorite Websites
-    </description>
+  <display-name>CFS-Employee</display-name>
+  
   <servlet>
-    <servlet-name>controller-servlet</servlet-name>
+    <description>Employee</description><servlet-name>controller-servlet</servlet-name>
     <servlet-class>
         	controller.Controller
         </servlet-class>
@@ -28,9 +26,9 @@
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>controller-servlet</servlet-name>
-    <url-pattern>   /manage.do                    </url-pattern>
+    <url-pattern>/employee-login.do</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
-    <welcome-file>   manage.do   </welcome-file>
+    <welcome-file>employee-login.jsp</welcome-file>
   </welcome-file-list>
 </web-app>

@@ -26,14 +26,14 @@ public class TransitionDayForm {
 		price = Double.parseDouble(this.price)/ 100;
 		return (long) price;
 	}
-	public Date getDateAsDate() {
-		
-		String 
-		Date date = new Date(this.date);
-		
-		
-		return date;
-	}
+//	public Date getDateAsDate() {
+////		
+////		String 
+////		Date date = new Date(this.date);
+////		
+////		
+////		return date;
+//	}
 	
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
