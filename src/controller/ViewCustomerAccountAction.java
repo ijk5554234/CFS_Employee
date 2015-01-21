@@ -101,6 +101,12 @@
 				}
 			}
 			
+			try {
+                request.setAttribute("customer", customerDAO.read(customerId));
+            } catch (RollbackException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
 			request.setAttribute("records", records);
 			request.setAttribute("cash", formattedCash);
 
