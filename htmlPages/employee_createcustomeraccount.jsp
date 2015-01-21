@@ -10,43 +10,39 @@
 	<table>
 		<tr>
 			<td>Email Address:</td>
-			<td><input type="text" name="comment" /></td>
+			<td><input type="text" name="email" /></td>
 		</tr>
 		<tr>
 			<td>Password:</td>
-			<td><input type="text" name="comment" /></td>
+			<td><input type="text" name="password" /></td>
 		</tr>
 		<tr>
 			<td>First Name:</td>
-			<td><input type="text" name="url" /></td>
+			<td><input type="text" name="firstName" /></td>
 		</tr>
 		<tr>
 			<td>Last Name:</td>
-			<td><input type="text" name="url" /></td>
+			<td><input type="text" name="lastName" /></td>
 		</tr>
 		<tr>
 			<td>Address Line1:</td>
-			<td><input type="text" name="comment" /></td>
+			<td><input type="text" name="addrLine1" /></td>
 		</tr>
 		<tr>
 			<td>Address Line2:</td>
-			<td><input type="text" name="comment" /></td>
+			<td><input type="text" name="addrLine2" /></td>
 		</tr>
 		<tr>
 			<td>City:</td>
-			<td><input type="text" name="comment" /></td>
-		</tr>
-		<tr>
-			<td>State:</td>
-			<td><input type="text" name="comment" /></td>
+			<td><input type="text" name="city" /></td>
 		</tr>
 		<tr>
 			<td>Zip Code:</td>
-			<td><input type="text" name="comment" /></td>
+			<td><input type="text" name="zip" /></td>
 		</tr>
 		<tr>
 			<td>Cash Balance:</td>
-			<td><input type="text" name="comment" value="0" /></td>
+			<td><input type="text" name="cash" value="0" /></td>
 		</tr>
 		<tr>
 			<td colspan="2" align="center"><input type="submit"
