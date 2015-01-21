@@ -1,12 +1,7 @@
 <jsp:include page="employee-toptemplate.jsp" />
 <title> Employee - Create Fund</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<html lang="en">
 
-<h4>Create Fund</h4>
-
-<p>
-	<form method="post" action="create fund.do">
+<form method="POST" action="createFund.do">
        
     <div class="fund_details_fields">
     <label for="fundname"> Fund Name <span class="mandatory">*</span></label><br>
@@ -25,10 +20,5 @@
 <br>
 <input type="submit" name="button" value="Create"/>    
                 
-	</form>
-</p>	
-		</td>
-	</tr>
-</table>
-</body>
+</form>
       <jsp:include page="employee-bottomtemplate.jsp" />
