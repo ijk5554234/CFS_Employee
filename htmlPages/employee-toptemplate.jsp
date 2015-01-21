@@ -1,76 +1,66 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="img/icon.png">
 
-<meta http-equiv="cache-control" content="no-cache">
-<meta http-equiv="pragma" content="no-cache">
-<title>CFS</title>
-<style>
-.menu-head {
-	font-size: 10pt;
-	font-weight: bold;
-	color: black;
-}
+<title>CFS Customer Login</title>
 
-.menu-item {
-	font-size: 10pt;
-	color: black
-}
-</style>
+<!-- Bootstrap core CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="css/cover.css" rel="stylesheet">
+
+
+<script src="js/ie-emulation-modes-warning.js"></script>
+
+
 </head>
-
+<!-- NAVBAR
+================================================== -->
 <body>
+	<div class="site-wrapper">
 
-	<table cellpadding="4" cellspacing="0">
-		<tr>
-			<!-- Banner row across the top -->
-			<td width="130"><img border="0" height="75"> <img
-				border="0" height="75"></td>
-			<td>&nbsp;</td>
-			<td width="500" bgcolor="white">
-				<p align="center">
-					<font size="5">Carnegie Financial Services</font>
-				</p>
-			</td>
-		</tr>
+		<div class="site-wrapper-inner">
 
-		<!-- Spacer row -->
-		<tr>
-			<td style="font-size: 5px">&nbsp;</td>
-			<td colspan="2" style="font-size: 5px">&nbsp;</td>
-		</tr>
+			<div class="cover-container">
+				<div class="container">
 
-		<tr>
-			<td valign="top" height="500">
-				<!-- Navigation bar is one table cell down the left side -->
-				<p align="left">
-							<span class="menu-head">John Smith</span>
-							<br />
-							<span class="menu-item"><a href="employee_createcustomeraccount.jsp">Create Customer Account</a></span>
-							<br />
-							<span class="menu-item"><a href="employee_createemployeeaccount.jsp">Create Employee Account</a></span>
-							<br />
-							<span class="menu-item"><a href="employee_changecustomerpassword.jsp">Reset Customer Password</a></span>
-							<br />
-							<span class="menu-item"><a href="employee_changepassword.jsp">Reset Employee Password</a></span>
-							<br />
-							<span class="menu-item"><a href="employee_viewaccount.jsp">View Customer Account</a></span>
-							<br />
-							<span class="menu-item"><a href="employee_viewTransactionHistory.jsp">View Customer Transaction History</a></span>
-							<br />
-							<span class="menu-item"><a href="employee_depositCheck.jsp">Deposit Check</a></span>
-							<br />
-							<span class="menu-item"><a href="employee_createfund.jsp">Create Fund</a></span>
-							<br />
-							<span class="menu-item"><a href="employee-transactionDay.jsp">Transition Day</a></span>
-							<br />
-							<span class="menu-item"><a href="logout.jsp">Log out</a></span>
-							<br />
-							<span class="menu-item">&nbsp;</span>
-							<br />
-				</p>
-			</td>
+					<div class="masthead">
+						<h3 class="text-muted">Carnegie Financial Service</h3>
+						<nav>
+							<ul class="nav nav-justified">
+							<li role="presentation" class="dropdown">
+    								<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">Manage Customer Account <span class="caret"></span></a>
+    								<ul class="dropdown-menu" role="menu">
+    									<li><a href="employee_createcustomeraccount.jsp">Create Customer Account</a></li>
+    									<li><a href="employee_changecustomerpassword.jsp">Reset Customer Password</a></li>
+    									<li><a href="employee_viewaccount.jsp">View Customer Account</a></li>
+    									<li><a href="employee_viewTransactionHistory.jsp">View Customer Transaction History</a></li>
+    									<li><a href="employee_depositCheck.jsp">Deposit Check</a></li>	
+    								</ul>
+    						</li>
+    						<li role="presentation" class="dropdown">
+    								<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">Manage Employee Account <span class="caret"></span></a>
+    								<ul class="dropdown-menu" role="menu">
+    									<li><a href="employee_createemployeeaccount.jsp">Create Employee Account</a></li>
+    									<li><a href="employee_changepassword.jsp">Reset Your Password</a></li>
+    								</ul>
+    						</li>
+								
+								<li><a href="employee_createfund.jsp">Create Funds</a></li>
+								<li><a href="employee-transactionDay.jsp">Transition Day</a></li>
+								<li><a href="">Contact Us</a></li>
+							</ul>
+						</nav>
+					</div>
 
-			<td>
-				<!-- Padding (blank space) between navbar and content -->
-			</td>
-			<td valign="top">
+
+
+				</div>
