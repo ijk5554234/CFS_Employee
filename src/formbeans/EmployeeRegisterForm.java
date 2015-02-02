@@ -1,3 +1,9 @@
+/*
+Team 5
+Task 7
+Date: Jan. 28, 2015
+Only for educational use
+ */
 package formbeans;
 
 import java.util.ArrayList;
@@ -18,7 +24,7 @@ public class EmployeeRegisterForm extends FormBean {
 	public void setAction(String s)    { action     = trimAndConvert(s,"<>\"");	}
 	public void setPassword(String s)  { password   = trimAndConvert(s,"<>\"");	}
 	
-	public String getUserName()     { return userName;	 }
+	public String getUserName()  { return userName;	 }
 	public String getFirstName() { return firstName; }
     public String getLastName()  { return lastName;  }
 	public String getPassword()  { return password;  }
@@ -40,7 +46,7 @@ public class EmployeeRegisterForm extends FormBean {
 			errors.add("Button is required");
 		if (errors.size() > 0)
 			return errors;
-		if (!action.equals("Register")) 
+		if (!action.equals("Create Employee")) 
 			errors.add("Invalid button");
 
 		return errors;

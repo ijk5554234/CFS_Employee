@@ -1,16 +1,22 @@
+/*
+Team 5
+Task 7
+Date: Jan. 28, 2015
+Only for educational use
+ */
 package databeans;
 
 import java.sql.Date;
 import org.genericdao.PrimaryKey;
 
-@PrimaryKey("fundId")
+@PrimaryKey("fundId,date")
 public class PriceBean {
 
 	private int  fundId;
 	private long price;
 	private Date date;
 
-		public int    getFundID()   { return fundId;}
+		public int    getFundId()   { return fundId;}
 		public long   getPrice()   	{ return price; }
 		public Date   getDate()     { return date;  }
 

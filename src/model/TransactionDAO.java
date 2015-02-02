@@ -1,3 +1,9 @@
+/*
+Team 5
+Task 7
+Date: Jan. 28, 2015
+Only for educational use
+ */
 package model;
 
 import java.util.Arrays;
@@ -23,26 +29,6 @@ public class TransactionDAO extends GenericDAO<TransactionBean> {
 	
 	public TransactionBean[] getTransactionsByCustomer(int customerId) throws RollbackException {
 		TransactionBean[] transactions = match(MatchArg.equals("customerId", customerId));
-		Arrays.sort(transactions); 
 		return transactions;
 	}
-	
-//	public void setPassword(String email, String password) throws RollbackException {
-//        try {
-//        	Transaction.begin();
-//			CustomerBean dbCustomer = read(email);
-//			
-//			if (dbCustomer == null) {
-//				throw new RollbackException("Email Address "+ email +" no longer exists");
-//			}
-//			
-//			dbCustomer.setPassword(password);
-//			
-//			update(dbCustomer);
-//			Transaction.commit();
-//		} finally {
-//			if (Transaction.isActive()) Transaction.rollback();
-//		}
-//	}
-
 }

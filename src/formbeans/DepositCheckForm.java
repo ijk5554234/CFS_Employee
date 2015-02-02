@@ -1,3 +1,9 @@
+/*
+Team 5
+Task 7
+Date: Jan. 28, 2015
+Only for educational use
+ */
 package formbeans;
 
 import java.util.ArrayList;
@@ -6,18 +12,22 @@ import java.util.List;
 import org.mybeans.form.FormBean;
 
 public class DepositCheckForm extends FormBean{
-	private String email;
+	
 	private String amount;
+	private String action;
 	
-	public String getEmail()   { return email;    }
 	public String getAmount()  { return amount;   }
+	public String getAction()  { return action;   }
 	
-	public void setFundName(String s) { email  = trimAndConvert(s,"<>>\"]"); }
-	public void setSymbol(String s)   { amount = trimAndConvert(s,"<>>\"]"); }
+	public void setAmount(String s)   { amount = trimAndConvert(s,"<>>\"]"); }
+	public void setAction(String s)   { action = trimAndConvert(s,"<>\""); }
 	
 	public long getAmountAsLong() {
+	    System.out.println(amount);
 		double am = Double.parseDouble(amount);
-		return (long) am * 100;
+		System.out.println(am);
+		System.out.println(Math.round(am * 100));
+		return Math.round(am * 100);
 	}
 
 	public List<String> getValidationErrors() {
@@ -29,9 +39,6 @@ public class DepositCheckForm extends FormBean{
 			errors.add("Not valid Amount");
 		}
 
-		if (email == null || email.length() == 0) {
-			errors.add("Customer's email is required");
-		}
 		
 		if (amount == null || amount.length() == 0) {
 			errors.add("Amount is required");
@@ -40,7 +47,8 @@ public class DepositCheckForm extends FormBean{
 		if (errors.size() > 0) {
 			return errors;
 		}
-
+		if (!action.equals("Deposit Confirm"))
+            errors.add("Invalid button");
 		return errors;
 	}
 

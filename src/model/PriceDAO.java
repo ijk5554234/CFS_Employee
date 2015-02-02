@@ -1,3 +1,9 @@
+/*
+Team 5
+Task 7
+Date: Jan. 28, 2015
+Only for educational use
+ */
 package model;
 
 import java.sql.Date;
@@ -11,6 +17,7 @@ import org.genericdao.RollbackException;
 import databeans.PriceBean;
 
 public class PriceDAO extends GenericDAO<PriceBean>{
+
 	public PriceDAO(String tableName, ConnectionPool pool) throws DAOException {
 		super(PriceBean.class, tableName, pool);
 	}
@@ -21,13 +28,11 @@ public class PriceDAO extends GenericDAO<PriceBean>{
 	}
 	
 	public Date getLastDay() throws RollbackException {
-		PriceBean[] prices = getAllPrices();
-		if (prices.length == 0) return null;
-		Date d = new Date(0);
-		for (PriceBean p : prices) {
-			if (p.getDate().compareTo(d) > 0) d.setTime(p.getDate().getTime());		
+		PriceBean[] prices = match(MatchArg.max("date"));
+		if (prices.length == 0){
+			return null;
 		}
-		return d;
+		return prices[0].getDate();
 	}
 	
 	public PriceBean[] getLastDayPrices() throws RollbackException {
@@ -39,7 +44,9 @@ public class PriceDAO extends GenericDAO<PriceBean>{
 	
 	public long getLastDayByFund(int fundId) throws RollbackException {
 		Date lastDay = getLastDay();
+		if (lastDay == null) return 0;
 		PriceBean lastDayPrice = read(fundId, lastDay);
+		if (lastDayPrice == null) return 0;
 		return lastDayPrice.getPrice();
 	} 
 }

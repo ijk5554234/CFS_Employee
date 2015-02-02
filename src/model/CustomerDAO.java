@@ -1,3 +1,9 @@
+/*
+Team 5
+Task 7
+Date: Jan. 28, 2015
+Only for educational use
+ */
 package model;
 
 import java.util.Arrays;
@@ -45,6 +51,7 @@ public class CustomerDAO extends GenericDAO<CustomerBean> {
 	
 	public CustomerBean getCustomerByEmail(String email) throws RollbackException {
 			CustomerBean[] dbCustomer = match(MatchArg.equals("email", email));
+			if (dbCustomer.length == 0) return null;
 			return dbCustomer[0];
 
 	}

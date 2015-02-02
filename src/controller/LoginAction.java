@@ -1,4 +1,9 @@
-
+/*
+Team 5
+Task 7
+Date: Jan. 28, 2015
+Only for educational use
+ */
 package controller;
 
 import java.util.ArrayList;
@@ -26,7 +31,7 @@ public class LoginAction extends Action {
 	}
 
 	public String getName() {
-		return "login.do";
+		return "employee_login.do";
 	}
 
 	public String perform(HttpServletRequest request) {
@@ -35,49 +40,52 @@ public class LoginAction extends Action {
 
 		try {
 			LoginForm form = formBeanFactory.create(request);
-			request.setAttribute("form", form);
 
-			// If no params were passed, return with no errors so that the form
-			// will be
-			// presented (we assume for the first time).
 			if (!form.isPresent()) {
-				return "login.jsp";
+				
+				return "employee_login.jsp";
 			}
 
-			// Any validation errors?
 			errors.addAll(form.getValidationErrors());
 			if (errors.size() != 0) {
-				return "login.jsp";
+				request.setAttribute("errors", errors);
+				return "employee_login.jsp";
 			}
 
 			// Look up the user
-			EmployeeBean employee = null;
-			try {
-				employee = employeeDAO.read(form.getUserName());
-			} catch (RollbackException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			EmployeeBean employee = employeeDAO.read(form.getUserName());
+			
 
 			if (employee == null) {
-				errors.add("Email address not found");
-				return "login.jsp";
+				errors.add("UserName not found");
+				return "employee_login.jsp";
 			}
 
 			// Check the password
 			if (!(employee.getPassword().equals(form.getPassword()))) {
 				errors.add("Incorrect password");
-				return "login.jsp";
+				return "employee_login.jsp";
 			}
 
+			
+			
 			// Attach (this copy of) the user bean to the session
 			HttpSession session = request.getSession();
-			session.setAttribute("user", employee);
+			session.setAttribute("employee", employee);
 
-			return "manage.do";
+			
+			EmployeeBean employee1 = (EmployeeBean) request.getSession().getAttribute("employee");
+	        if (employee1 == null) 
+	            System.out.println("not sessioned");
+
 		} catch (FormBeanException e) {
 			errors.add(e.getMessage());
 			return "error.jsp";
+		} catch (RollbackException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
+		return "employee_welcome.do";
 	}
 }

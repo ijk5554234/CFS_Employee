@@ -1,116 +1,112 @@
+/*
+Team 5
+Task 7
+Date: Jan. 28, 2015
+Only for educational use
+ */
+package controller;
 
-	/*
-	Jike Li
-	Date: Jan. 19, 2015
-	 */
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
-	package controller;
+import javax.servlet.http.HttpServletRequest;
 
-	import java.text.DecimalFormat;
-	import java.util.ArrayList;
-	import java.util.List;
+import org.genericdao.RollbackException;
 
-	import javax.servlet.http.HttpServletRequest;
+import databeans.CustomerBean;
+import databeans.EmployeeBean;
+import databeans.FundBean;
+import databeans.PositionBean;
+import formbeans.ViewAccountForm;
+import model.CustomerDAO;
+import model.FundDAO;
+import model.Model;
+import model.PositionDAO;
+import model.PriceDAO;
 
-	import org.genericdao.RollbackException;
+public class ViewCustomerAccountAction extends Action {
 
-	import databeans.FundBean;
-	import databeans.PositionBean;
-	import formbeans.PositionRecordBean;
-	import model.CustomerDAO;
-	import model.FundDAO;
-	import model.Model;
-	import model.PositionDAO;
-	import model.PriceDAO;
+    private CustomerDAO customerDAO;
+    private FundDAO fundDAO;
+    private PositionDAO positionDAO;
+    private PriceDAO priceDAO;
 
-	public class ViewCustomerAccountAction extends Action {
+    public ViewCustomerAccountAction(Model model) {
+        customerDAO = model.getCustomerDAO();
+        fundDAO = model.geFundDAO();
+        priceDAO = model.getPriceDAO();
+        positionDAO = model.getPositionDAO();
+    }
 
-		private CustomerDAO customerDAO;
-		private FundDAO fundDAO;
-		private PositionDAO positionDAO;
-		private PriceDAO priceDAO;
+    public String getName() {
+        return "employee_viewaccount.do";
+    }
 
-		public ViewCustomerAccountAction(Model model) {
-			customerDAO = model.getCustomerDAO();
-			fundDAO = model.geFundDAO();
-			priceDAO = model.getPriceDAO();
-			positionDAO = model.getPositionDAO();
-		}
+    public String perform(HttpServletRequest request) {
+        EmployeeBean employ = (EmployeeBean) request.getSession(false)
+                .getAttribute("employee");
+        if (employ == null) {
+            return "employee_login.do";
+        }
+        List<String> errors = new ArrayList<String>();
+        request.setAttribute("errors", errors);
+        request.setAttribute("title", "View Customer Account");
 
-		public String getName() {
-			// TODO Auto-generated method stub
-			return "viewCustomerAccount.do";
-		}
-
-		public String perform(HttpServletRequest request) {
-			List<String> errors = new ArrayList<String>();
-			request.setAttribute("errors", errors);
-			
-			
-			
-			int customerId = (int) request.getAttribute("customerId");
-
-			PositionBean[] positions = null;
-
-			try {
-				positions = positionDAO.getPositionByCustomer(customerId);
-			} catch (RollbackException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			String formattedCash = null;
-			try {
-				double cash = customerDAO.read(customerId).getCash() / 100;
-				DecimalFormat df2 = new DecimalFormat("0.00");
-				formattedCash = df2.format(cash);
-				
-				
-			} catch (RollbackException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-
-			PositionRecordBean[] records = new PositionRecordBean[positions.length];
-
-			for (int i = 0; i < records.length; i++) {
-				int fundId = positions[i].getFundId();
-				FundBean fund = null;
-				try {
-					fund = fundDAO.read(fundId);
-				} catch (RollbackException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-				records[i].setFundName(fund.getFundName());
-				records[i].setSymbol(fund.getSymbol());
-
-				double share = positions[i].getShare() / 1000;
-				DecimalFormat df = new DecimalFormat("0.000");
-				String formattedShare = df.format(share);
-				records[i].setShare(formattedShare);
-
-				try {
-					double lastPrice = priceDAO.getLastDayByFund(fundId) / 100;
-					DecimalFormat df2 = new DecimalFormat("0.00");
-					String formattedLastPrice = df2.format(lastPrice);
-					records[i].setLastPrice(formattedLastPrice);
-				} catch (RollbackException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			
-			try {
-                request.setAttribute("customer", customerDAO.read(customerId));
-            } catch (RollbackException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+        try {
+             
+            String id = request.getParameter("customerId");
+            if(id == null){
+                return "employee_view_customer_list.jsp";
             }
-			request.setAttribute("records", records);
-			request.setAttribute("cash", formattedCash);
+            
+            int newId = Integer.parseInt(id);
+            CustomerBean customer = customerDAO.read(newId);
+            PositionBean[] positions = positionDAO
+                    .getPositionByCustomer(customer.getCustomerId());
+            String formattedCash = null;
+            double cash = (double) customer.getCash() / 100;
+            DecimalFormat df0 = new DecimalFormat(",##0.00");
+            formattedCash = df0.format(cash);
 
-			return "viewAccount.jsp";
-		}
-	}
+            ViewAccountForm[] records = new ViewAccountForm[positions.length];
+            for (int i = 0; i < records.length; i++) {
+            	records[i] = new ViewAccountForm();
+                int fundId = positions[i].getFundId();
+                FundBean fund = null;
+                try {
+                    fund = fundDAO.read(fundId);
+                } catch (RollbackException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
 
+                records[i] = new ViewAccountForm();
+                records[i].setFundName(fund.getFundName());
+                records[i].setSymbol(fund.getSymbol());
+
+                double share = positions[i].getShare() / 1000;
+                DecimalFormat df = new DecimalFormat(",##0.000");
+                String formattedShare = df.format(share);
+                records[i].setShare(formattedShare);
+
+                double lastPrice = priceDAO.getLastDayByFund(fundId) / 100;
+                DecimalFormat df2 = new DecimalFormat(",##0.00");
+                String formattedLastPrice = df2.format(lastPrice);
+                records[i].setLastPrice(formattedLastPrice);
+            }
+
+
+            request.setAttribute("msg", "This is the account information of "
+                    + customer.toString());
+            request.setAttribute("customer", customer);
+            request.setAttribute("records", records);
+            request.setAttribute("cash", formattedCash);
+
+        } catch (RollbackException e) {
+            e.printStackTrace();
+        }
+
+        return "employee_viewaccount.jsp";
+    }
+}

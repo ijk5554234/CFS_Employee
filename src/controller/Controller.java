@@ -1,4 +1,9 @@
-
+/*
+Team 5
+Task 7
+Date: Jan. 28, 2015
+Only for educational use
+ */
 package controller;
 
 import java.io.IOException;
@@ -10,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import databeans.CustomerBean;
+import databeans.EmployeeBean;
 import model.Model;
 
 public class Controller extends HttpServlet {
@@ -22,7 +27,17 @@ public class Controller extends HttpServlet {
 
 		Action.add(new LoginAction(model));
 		Action.add(new LogoutAction(model));
-
+		Action.add(new ManageAction(model));
+		Action.add(new CreateEmployeeAction(model));
+		Action.add(new CreateCustomerAction(model));
+		Action.add(new SetCustomerPswAction(model));
+		Action.add(new ChangePswAction(model));
+		Action.add(new ViewCustomerAccountAction(model));
+		Action.add(new CreateFundAction(model));
+		Action.add(new ViewCustomerHistoryAction(model));
+		Action.add(new DepositCheckAction(model));
+		Action.add(new TransitionDayAction(model));
+		Action.add(new ViewCustomerListAction(model));
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -47,17 +62,20 @@ public class Controller extends HttpServlet {
 	private String performTheAction(HttpServletRequest request) {
 		HttpSession session = request.getSession(true);
 		String servletPath = request.getServletPath();
-		CustomerBean customer = (CustomerBean) session.getAttribute("customer");
+		EmployeeBean employee = (EmployeeBean) session.getAttribute("employee");
 		String action = getActionName(servletPath);
+		
+		
 
-		if (customer == null && action.equals("manage.do")) {
+		if (employee == null && action.equals("manage.do")) {
 			// If the user hasn't logged in, so login is the only option
-			return Action.perform("login.do", request);
+			return Action.perform("employee_login.do", request);
 		}
 
 		if (action.equals("welcome")) {
 			// User is logged in, but at the root of our web app
-			return Action.perform("manage.do", request);
+
+			return Action.perform("employee_welcome.do", request);
 		}
 
 		// Let the logged in user run his chosen action

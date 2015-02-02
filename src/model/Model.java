@@ -1,3 +1,9 @@
+/*
+Team 5
+Task 7
+Date: Jan. 28, 2015
+Only for educational use
+ */
 package model;
 
 import javax.servlet.ServletConfig;
@@ -5,6 +11,9 @@ import javax.servlet.ServletException;
 
 import org.genericdao.ConnectionPool;
 import org.genericdao.DAOException;
+import org.genericdao.RollbackException;
+
+import databeans.EmployeeBean;
 
 public class Model {
 	private CustomerDAO 	customerDAO;
@@ -25,10 +34,23 @@ public class Model {
 			customerDAO     = new CustomerDAO("customer", pool);
 			fundDAO 	    = new FundDAO("fund", pool);
 			positionDAO     = new PositionDAO("position", pool);
-			priceDAO        = new PriceDAO("priceDAO", pool);
+			priceDAO        = new PriceDAO("price", pool);
 			transactionDAO  = new TransactionDAO("transaction", pool);
 		} catch (DAOException e) {
 			throw new ServletException(e);
+		}
+		
+		try {
+			if (employeeDAO.read("admin") == null) {
+				EmployeeBean admin = new EmployeeBean();
+				admin.setFirstName("John");
+				admin.setLastName("Smith");
+				admin.setPassword("123");
+				admin.setUserName("admin");
+				employeeDAO.create(admin);
+			}
+		} catch (RollbackException e) {
+			e.printStackTrace();
 		}
 	}
 	public EmployeeDAO    getEmployeeDAO()    { return employeeDAO;    }

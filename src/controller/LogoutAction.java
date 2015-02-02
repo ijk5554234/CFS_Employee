@@ -1,9 +1,8 @@
 /*
-Jike Li
-Andrew ID:jikel
-08-600
-Homework #9
-Date: Nov. 29, 2014
+Team 5
+Task 7
+Date: Jan. 28, 2015
+Only for educational use
  */
 package controller;
 
@@ -20,14 +19,14 @@ public class LogoutAction extends Action {
 
 	public LogoutAction(Model model) { }
 
-	public String getName() { return "logout.do"; }
+	public String getName() { return "employee_logout.do"; }
 
 	public String perform(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
-        session.setAttribute("customer",null);
+        session.setAttribute("employee",null);
         
         request.setAttribute("message","You've successfully logged out!");
 
-        return "success.jsp";
+        return "employee_login.do";
     }
 }

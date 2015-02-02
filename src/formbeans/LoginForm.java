@@ -1,10 +1,16 @@
-
+/*
+Team 5
+Task 7
+Date: Jan. 28, 2015
+Only for educational use
+ */
 package formbeans;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.mybeans.form.FormBean;
+
 public class LoginForm extends FormBean{
 	private String userName;
 	private String password;
@@ -12,8 +18,7 @@ public class LoginForm extends FormBean{
 	
 	public void setUserName(String s) { userName = trimAndConvert(s,"<>\""); }
 	public void setAction(String s)   { action   = trimAndConvert(s,"<>\""); }
-	public void setPassword(String s) { password = s.trim();                 }
-
+	public void setPassword(String s) { password = trimAndConvert(s,"<>\""); }
 	public String getUserName() { return userName; }
 	public String getPassword() { return password; }
 	public String getAction()   { return action;   }
@@ -34,9 +39,6 @@ public class LoginForm extends FormBean{
 
 		if (!action.equals("Login"))
 			errors.add("Invalid button");
-		if (userName.matches(".*[<>\"].*"))
-			errors.add("Username may not contain angle brackets or quotes");
-
 		return errors;
 	}
 }
